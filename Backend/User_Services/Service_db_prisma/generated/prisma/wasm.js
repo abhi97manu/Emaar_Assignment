@@ -98,11 +98,12 @@ exports.Prisma.UserScalarFieldEnum = {
   firstname: 'firstname',
   lastname: 'lastname',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  tenant_id: 'tenant_id'
 };
 
 exports.Prisma.TenantsScalarFieldEnum = {
-  id: 'id',
+  tenant_id: 'tenant_id',
   name: 'name',
   url: 'url'
 };
@@ -169,13 +170,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../Service_db_prisma/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"SERVICE_DATABASE_URL\")\n}\n\nmodel User {\n  id        Int       @id\n  firstname String\n  lastname  String\n  email     String    @unique\n  password  String\n  tenants   Tenants[]\n}\n\nmodel Tenants {\n  id   Int    @id\n  user User[]\n  name String\n  url  String\n}\n",
-  "inlineSchemaHash": "e892ce614dd95d3f40ee7e927a059843a6dd42e2687c984fa0d6f9b2b83c7960",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../Service_db_prisma/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"SERVICE_DATABASE_URL\")\n}\n\nmodel User {\n  id        Int       @id @default(autoincrement())\n  firstname String\n  lastname  String\n  email     String    @unique\n  password  String\n  tenants   Tenants[]\n  tenant_id String[]\n}\n\nmodel Tenants {\n  tenant_id Int    @id\n  user      User[]\n  name      String\n  url       String\n}\n",
+  "inlineSchemaHash": "c152619aecd5540e0ba5303c1ebc946692fcfd7e807969bfa1c6c99ab6d23d39",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"firstname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tenants\",\"kind\":\"object\",\"type\":\"Tenants\",\"relationName\":\"TenantsToUser\"}],\"dbName\":null},\"Tenants\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"TenantsToUser\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"firstname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tenants\",\"kind\":\"object\",\"type\":\"Tenants\",\"relationName\":\"TenantsToUser\"},{\"name\":\"tenant_id\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Tenants\":{\"fields\":[{\"name\":\"tenant_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"TenantsToUser\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

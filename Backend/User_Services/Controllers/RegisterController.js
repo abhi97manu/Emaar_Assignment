@@ -19,7 +19,7 @@ async function RegisterUser(req, res) {
             lastname :lastname,
             email : email,
             password : hashPass,
-            company: company
+            tenant_id: company
 
         }
     });

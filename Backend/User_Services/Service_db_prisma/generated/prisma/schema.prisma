@@ -15,17 +15,18 @@ datasource db {
 }
 
 model User {
-  id        Int       @id
+  id        Int       @id @default(autoincrement())
   firstname String
   lastname  String
   email     String    @unique
   password  String
   tenants   Tenants[]
+  tenant_id String[]
 }
 
 model Tenants {
-  id   Int    @id
-  user User[]
-  name String
-  url  String
+  tenant_id Int    @id
+  user      User[]
+  name      String
+  url       String
 }
