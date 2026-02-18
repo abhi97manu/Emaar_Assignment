@@ -7,6 +7,8 @@ const RegisterRoute = express.Router()
 
 
 RegisterRoute.post(`/register`, RegisterUser)
+
+
 // RegisterRoute.post(`/register_admin`,async(req, res)=>{
 //          const { firstname, lastname, email, password, empId } = req.body;
 //     await prisma.admin.create({
@@ -20,6 +22,7 @@ RegisterRoute.post(`/register`, RegisterUser)
 //         }
 //     })
 // })
+
 
 
 module.exports = RegisterRoute
