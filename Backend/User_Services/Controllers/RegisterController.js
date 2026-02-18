@@ -19,13 +19,12 @@ async function RegisterUser(req, res) {
             lastname :lastname,
             email : email,
             password : hashPass,
-            empId: empId,
             company: company
 
         }
     });
 
-    res.status(201).send("Generated Sucessfully")
+    res.status(201).send({message : "User Created Sucessfully"})
 
   } catch (error) {
     console.log(error);

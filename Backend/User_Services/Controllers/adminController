@@ -1,0 +1,23 @@
+const prisma = require(`../DB/Prisma.DB`);
+const bcrypt = require(`bcrypt`)
+
+async function adminloign(req, res) {
+  const { email, password } = req.body;
+  try {
+    const adminUser = await prisma.admin.findFirst({ where: { email: email } });
+
+    if (adminUser) {
+        const decodedUser = await bcrypt.compare(password,adminUser.password)
+        if(decodedUser)
+        {
+             console.log(adminUser.role);
+        }
+     
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+module.exports = adminloign
