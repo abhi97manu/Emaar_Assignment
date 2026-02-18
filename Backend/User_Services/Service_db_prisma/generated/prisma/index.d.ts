@@ -1055,6 +1055,7 @@ export namespace Prisma {
     lastname: number
     email: number
     password: number
+    tenant_id: number
     _all: number
   }
 
@@ -1089,6 +1090,7 @@ export namespace Prisma {
     lastname?: true
     email?: true
     password?: true
+    tenant_id?: true
     _all?: true
   }
 
@@ -1184,6 +1186,7 @@ export namespace Prisma {
     lastname: string
     email: string
     password: string
+    tenant_id: string[]
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1211,6 +1214,7 @@ export namespace Prisma {
     lastname?: boolean
     email?: boolean
     password?: boolean
+    tenant_id?: boolean
     tenants?: boolean | User$tenantsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1221,6 +1225,7 @@ export namespace Prisma {
     lastname?: boolean
     email?: boolean
     password?: boolean
+    tenant_id?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1229,6 +1234,7 @@ export namespace Prisma {
     lastname?: boolean
     email?: boolean
     password?: boolean
+    tenant_id?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1237,9 +1243,10 @@ export namespace Prisma {
     lastname?: boolean
     email?: boolean
     password?: boolean
+    tenant_id?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstname" | "lastname" | "email" | "password", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstname" | "lastname" | "email" | "password" | "tenant_id", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenants?: boolean | User$tenantsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1258,6 +1265,7 @@ export namespace Prisma {
       lastname: string
       email: string
       password: string
+      tenant_id: string[]
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1687,6 +1695,7 @@ export namespace Prisma {
     readonly lastname: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly tenant_id: FieldRef<"User", 'String[]'>
   }
     
 
@@ -2130,27 +2139,27 @@ export namespace Prisma {
   }
 
   export type TenantsAvgAggregateOutputType = {
-    id: number | null
+    tenant_id: number | null
   }
 
   export type TenantsSumAggregateOutputType = {
-    id: number | null
+    tenant_id: number | null
   }
 
   export type TenantsMinAggregateOutputType = {
-    id: number | null
+    tenant_id: number | null
     name: string | null
     url: string | null
   }
 
   export type TenantsMaxAggregateOutputType = {
-    id: number | null
+    tenant_id: number | null
     name: string | null
     url: string | null
   }
 
   export type TenantsCountAggregateOutputType = {
-    id: number
+    tenant_id: number
     name: number
     url: number
     _all: number
@@ -2158,27 +2167,27 @@ export namespace Prisma {
 
 
   export type TenantsAvgAggregateInputType = {
-    id?: true
+    tenant_id?: true
   }
 
   export type TenantsSumAggregateInputType = {
-    id?: true
+    tenant_id?: true
   }
 
   export type TenantsMinAggregateInputType = {
-    id?: true
+    tenant_id?: true
     name?: true
     url?: true
   }
 
   export type TenantsMaxAggregateInputType = {
-    id?: true
+    tenant_id?: true
     name?: true
     url?: true
   }
 
   export type TenantsCountAggregateInputType = {
-    id?: true
+    tenant_id?: true
     name?: true
     url?: true
     _all?: true
@@ -2271,7 +2280,7 @@ export namespace Prisma {
   }
 
   export type TenantsGroupByOutputType = {
-    id: number
+    tenant_id: number
     name: string
     url: string
     _count: TenantsCountAggregateOutputType | null
@@ -2296,7 +2305,7 @@ export namespace Prisma {
 
 
   export type TenantsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    tenant_id?: boolean
     name?: boolean
     url?: boolean
     user?: boolean | Tenants$userArgs<ExtArgs>
@@ -2304,24 +2313,24 @@ export namespace Prisma {
   }, ExtArgs["result"]["tenants"]>
 
   export type TenantsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    tenant_id?: boolean
     name?: boolean
     url?: boolean
   }, ExtArgs["result"]["tenants"]>
 
   export type TenantsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    tenant_id?: boolean
     name?: boolean
     url?: boolean
   }, ExtArgs["result"]["tenants"]>
 
   export type TenantsSelectScalar = {
-    id?: boolean
+    tenant_id?: boolean
     name?: boolean
     url?: boolean
   }
 
-  export type TenantsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "url", ExtArgs["result"]["tenants"]>
+  export type TenantsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tenant_id" | "name" | "url", ExtArgs["result"]["tenants"]>
   export type TenantsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Tenants$userArgs<ExtArgs>
     _count?: boolean | TenantsCountOutputTypeDefaultArgs<ExtArgs>
@@ -2335,7 +2344,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
+      tenant_id: number
       name: string
       url: string
     }, ExtArgs["result"]["tenants"]>
@@ -2421,8 +2430,8 @@ export namespace Prisma {
      * // Get first 10 Tenants
      * const tenants = await prisma.tenants.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const tenantsWithIdOnly = await prisma.tenants.findMany({ select: { id: true } })
+     * // Only select the `tenant_id`
+     * const tenantsWithTenant_idOnly = await prisma.tenants.findMany({ select: { tenant_id: true } })
      * 
      */
     findMany<T extends TenantsFindManyArgs>(args?: SelectSubset<T, TenantsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -2466,9 +2475,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Tenants and only return the `id`
-     * const tenantsWithIdOnly = await prisma.tenants.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many Tenants and only return the `tenant_id`
+     * const tenantsWithTenant_idOnly = await prisma.tenants.createManyAndReturn({
+     *   select: { tenant_id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -2557,9 +2566,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Tenants and only return the `id`
-     * const tenantsWithIdOnly = await prisma.tenants.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more Tenants and only return the `tenant_id`
+     * const tenantsWithTenant_idOnly = await prisma.tenants.updateManyAndReturn({
+     *   select: { tenant_id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2762,7 +2771,7 @@ export namespace Prisma {
    * Fields of the Tenants model
    */
   interface TenantsFieldRefs {
-    readonly id: FieldRef<"Tenants", 'Int'>
+    readonly tenant_id: FieldRef<"Tenants", 'Int'>
     readonly name: FieldRef<"Tenants", 'String'>
     readonly url: FieldRef<"Tenants", 'String'>
   }
@@ -3214,14 +3223,15 @@ export namespace Prisma {
     firstname: 'firstname',
     lastname: 'lastname',
     email: 'email',
-    password: 'password'
+    password: 'password',
+    tenant_id: 'tenant_id'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   export const TenantsScalarFieldEnum: {
-    id: 'id',
+    tenant_id: 'tenant_id',
     name: 'name',
     url: 'url'
   };
@@ -3304,6 +3314,7 @@ export namespace Prisma {
     lastname?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    tenant_id?: StringNullableListFilter<"User">
     tenants?: TenantsListRelationFilter
   }
 
@@ -3313,6 +3324,7 @@ export namespace Prisma {
     lastname?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    tenant_id?: SortOrder
     tenants?: TenantsOrderByRelationAggregateInput
   }
 
@@ -3325,6 +3337,7 @@ export namespace Prisma {
     firstname?: StringFilter<"User"> | string
     lastname?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    tenant_id?: StringNullableListFilter<"User">
     tenants?: TenantsListRelationFilter
   }, "id" | "email">
 
@@ -3334,6 +3347,7 @@ export namespace Prisma {
     lastname?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    tenant_id?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -3350,37 +3364,38 @@ export namespace Prisma {
     lastname?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
+    tenant_id?: StringNullableListFilter<"User">
   }
 
   export type TenantsWhereInput = {
     AND?: TenantsWhereInput | TenantsWhereInput[]
     OR?: TenantsWhereInput[]
     NOT?: TenantsWhereInput | TenantsWhereInput[]
-    id?: IntFilter<"Tenants"> | number
+    tenant_id?: IntFilter<"Tenants"> | number
     name?: StringFilter<"Tenants"> | string
     url?: StringFilter<"Tenants"> | string
     user?: UserListRelationFilter
   }
 
   export type TenantsOrderByWithRelationInput = {
-    id?: SortOrder
+    tenant_id?: SortOrder
     name?: SortOrder
     url?: SortOrder
     user?: UserOrderByRelationAggregateInput
   }
 
   export type TenantsWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    tenant_id?: number
     AND?: TenantsWhereInput | TenantsWhereInput[]
     OR?: TenantsWhereInput[]
     NOT?: TenantsWhereInput | TenantsWhereInput[]
     name?: StringFilter<"Tenants"> | string
     url?: StringFilter<"Tenants"> | string
     user?: UserListRelationFilter
-  }, "id">
+  }, "tenant_id">
 
   export type TenantsOrderByWithAggregationInput = {
-    id?: SortOrder
+    tenant_id?: SortOrder
     name?: SortOrder
     url?: SortOrder
     _count?: TenantsCountOrderByAggregateInput
@@ -3394,35 +3409,36 @@ export namespace Prisma {
     AND?: TenantsScalarWhereWithAggregatesInput | TenantsScalarWhereWithAggregatesInput[]
     OR?: TenantsScalarWhereWithAggregatesInput[]
     NOT?: TenantsScalarWhereWithAggregatesInput | TenantsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Tenants"> | number
+    tenant_id?: IntWithAggregatesFilter<"Tenants"> | number
     name?: StringWithAggregatesFilter<"Tenants"> | string
     url?: StringWithAggregatesFilter<"Tenants"> | string
   }
 
   export type UserCreateInput = {
-    id: number
     firstname: string
     lastname: string
     email: string
     password: string
+    tenant_id?: UserCreatetenant_idInput | string[]
     tenants?: TenantsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
-    id: number
+    id?: number
     firstname: string
     lastname: string
     email: string
     password: string
+    tenant_id?: UserCreatetenant_idInput | string[]
     tenants?: TenantsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    tenant_id?: UserUpdatetenant_idInput | string[]
     tenants?: TenantsUpdateManyWithoutUserNestedInput
   }
 
@@ -3432,23 +3448,25 @@ export namespace Prisma {
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    tenant_id?: UserUpdatetenant_idInput | string[]
     tenants?: TenantsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
-    id: number
+    id?: number
     firstname: string
     lastname: string
     email: string
     password: string
+    tenant_id?: UserCreatetenant_idInput | string[]
   }
 
   export type UserUpdateManyMutationInput = {
-    id?: IntFieldUpdateOperationsInput | number
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    tenant_id?: UserUpdatetenant_idInput | string[]
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -3457,50 +3475,51 @@ export namespace Prisma {
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    tenant_id?: UserUpdatetenant_idInput | string[]
   }
 
   export type TenantsCreateInput = {
-    id: number
+    tenant_id: number
     name: string
     url: string
     user?: UserCreateNestedManyWithoutTenantsInput
   }
 
   export type TenantsUncheckedCreateInput = {
-    id: number
+    tenant_id: number
     name: string
     url: string
     user?: UserUncheckedCreateNestedManyWithoutTenantsInput
   }
 
   export type TenantsUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    tenant_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateManyWithoutTenantsNestedInput
   }
 
   export type TenantsUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    tenant_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
     user?: UserUncheckedUpdateManyWithoutTenantsNestedInput
   }
 
   export type TenantsCreateManyInput = {
-    id: number
+    tenant_id: number
     name: string
     url: string
   }
 
   export type TenantsUpdateManyMutationInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    tenant_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
   }
 
   export type TenantsUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    tenant_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
   }
@@ -3531,6 +3550,14 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type TenantsListRelationFilter = {
     every?: TenantsWhereInput
     some?: TenantsWhereInput
@@ -3547,6 +3574,7 @@ export namespace Prisma {
     lastname?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    tenant_id?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -3618,29 +3646,33 @@ export namespace Prisma {
   }
 
   export type TenantsCountOrderByAggregateInput = {
-    id?: SortOrder
+    tenant_id?: SortOrder
     name?: SortOrder
     url?: SortOrder
   }
 
   export type TenantsAvgOrderByAggregateInput = {
-    id?: SortOrder
+    tenant_id?: SortOrder
   }
 
   export type TenantsMaxOrderByAggregateInput = {
-    id?: SortOrder
+    tenant_id?: SortOrder
     name?: SortOrder
     url?: SortOrder
   }
 
   export type TenantsMinOrderByAggregateInput = {
-    id?: SortOrder
+    tenant_id?: SortOrder
     name?: SortOrder
     url?: SortOrder
   }
 
   export type TenantsSumOrderByAggregateInput = {
-    id?: SortOrder
+    tenant_id?: SortOrder
+  }
+
+  export type UserCreatetenant_idInput = {
+    set: string[]
   }
 
   export type TenantsCreateNestedManyWithoutUserInput = {
@@ -3655,16 +3687,13 @@ export namespace Prisma {
     connect?: TenantsWhereUniqueInput | TenantsWhereUniqueInput[]
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type UserUpdatetenant_idInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type TenantsUpdateManyWithoutUserNestedInput = {
@@ -3678,6 +3707,14 @@ export namespace Prisma {
     update?: TenantsUpdateWithWhereUniqueWithoutUserInput | TenantsUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: TenantsUpdateManyWithWhereWithoutUserInput | TenantsUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: TenantsScalarWhereInput | TenantsScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type TenantsUncheckedUpdateManyWithoutUserNestedInput = {
@@ -3801,13 +3838,13 @@ export namespace Prisma {
   }
 
   export type TenantsCreateWithoutUserInput = {
-    id: number
+    tenant_id: number
     name: string
     url: string
   }
 
   export type TenantsUncheckedCreateWithoutUserInput = {
-    id: number
+    tenant_id: number
     name: string
     url: string
   }
@@ -3837,25 +3874,26 @@ export namespace Prisma {
     AND?: TenantsScalarWhereInput | TenantsScalarWhereInput[]
     OR?: TenantsScalarWhereInput[]
     NOT?: TenantsScalarWhereInput | TenantsScalarWhereInput[]
-    id?: IntFilter<"Tenants"> | number
+    tenant_id?: IntFilter<"Tenants"> | number
     name?: StringFilter<"Tenants"> | string
     url?: StringFilter<"Tenants"> | string
   }
 
   export type UserCreateWithoutTenantsInput = {
-    id: number
     firstname: string
     lastname: string
     email: string
     password: string
+    tenant_id?: UserCreatetenant_idInput | string[]
   }
 
   export type UserUncheckedCreateWithoutTenantsInput = {
-    id: number
+    id?: number
     firstname: string
     lastname: string
     email: string
     password: string
+    tenant_id?: UserCreatetenant_idInput | string[]
   }
 
   export type UserCreateOrConnectWithoutTenantsInput = {
@@ -3888,32 +3926,33 @@ export namespace Prisma {
     lastname?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    tenant_id?: StringNullableListFilter<"User">
   }
 
   export type TenantsUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    tenant_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
   }
 
   export type TenantsUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    tenant_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
   }
 
   export type TenantsUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    tenant_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpdateWithoutTenantsInput = {
-    id?: IntFieldUpdateOperationsInput | number
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    tenant_id?: UserUpdatetenant_idInput | string[]
   }
 
   export type UserUncheckedUpdateWithoutTenantsInput = {
@@ -3922,6 +3961,7 @@ export namespace Prisma {
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    tenant_id?: UserUpdatetenant_idInput | string[]
   }
 
   export type UserUncheckedUpdateManyWithoutTenantsInput = {
@@ -3930,6 +3970,7 @@ export namespace Prisma {
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    tenant_id?: UserUpdatetenant_idInput | string[]
   }
 
 

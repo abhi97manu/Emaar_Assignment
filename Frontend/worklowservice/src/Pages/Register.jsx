@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useGetApiCall } from "../Utills/useGetApiCall";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const server_url = import.meta.env.VITE_SERVER_URL;
 const Register = () => {
   const { data, error } = useGetApiCall("tenantList");
   const [loading, setLoading] = useState(false);
+
+    
+  const navigate = useNavigate()
 
   const {
     register,
@@ -16,18 +20,19 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-
- 
+ console.log(data);
+   
     
     try {
-      const response = axios.post(`${server_url}user/login`, data);
-      setLoading(true);
-      console.log(response);
+      const response = await axios.post(`${server_url}api/register`, data);
+      if (response)
+      {setLoading(false);
+        navigate('/login')
+      }
+      
     } catch (error) {
       console.log(error);
-    } finally {
-      //navigate
-    }
+    } 
   };
 
   return (
@@ -142,11 +147,11 @@ const Register = () => {
                     <input
                       type="checkbox"
                       name={`${value.id}`}
-                      value = {`${value.id}`}
-                      id={`${value.id}`}
+                      value = {`${value.tenant_id}`}
+                      id={`${value.tenant_id}`}
                       {...register("company")}
                     />
-                     <label for={`${value.id}`}>{value.name}</label>
+                     <label for={`${value.tenant_id}`}>{value.name}</label>
                      </>
                   );
                 })

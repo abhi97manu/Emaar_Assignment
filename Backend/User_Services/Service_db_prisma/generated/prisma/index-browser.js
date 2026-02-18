@@ -126,11 +126,12 @@ exports.Prisma.UserScalarFieldEnum = {
   firstname: 'firstname',
   lastname: 'lastname',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  tenant_id: 'tenant_id'
 };
 
 exports.Prisma.TenantsScalarFieldEnum = {
-  id: 'id',
+  tenant_id: 'tenant_id',
   name: 'name',
   url: 'url'
 };
