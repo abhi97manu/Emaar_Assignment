@@ -1,5 +1,9 @@
 const prisma = require("../DB/Prisma.DB");
-const bcrypt = require(`bcrypt`)
+const bcrypt = require(`bcrypt`);
+
+const jwt = require("jsonwebtoken");
+
+// Any user can access it, to use this service
 
 async function userLogin(req, res) {
   const { email, password } = req.body;
@@ -7,20 +11,42 @@ async function userLogin(req, res) {
   try {
     const user = await prisma.user.findFirst({ where: { email: email } });
 
-    
-
     if (user) {
-        const decoded = await bcrypt.compare(password, user.password);
-        if(decoded)
-            console.log("Role : ", user.role);
-    } 
-    else{
-        console.log(user, " not found");
-        
+      const decoded = await bcrypt.compare(password, user.password);
+      if (decoded) {
+        const setCookies = jwt.sign(
+          { email: user.email },
+          process.env.JWT_SECRET,
+          { expiresIn: "1h" },
+        );
+        res.cookie("activateToken", setCookies, {
+          httpOnly: true,
+          secure: true,
+        });
+        res.status(200).send({ message: "Logged In" });
+      }
+    } else {
+      res.status(403).send({ message: "Forbidden" });
     }
   } catch (err) {
-    console.log(err);
+    res.status(500).send({ message: `Error : ${err}` });
   }
 }
 
-module.exports = userLogin;
+
+//Get user profile details, 
+async function getUserProfile(req, res) {
+  const email = req.email;
+  try {
+    const userProfile = await prisma.user.findFirst({
+      where: { email: email },
+    });
+    res.status(200).send({ userProfile });
+  } catch (err) {
+    res.status(500).send({ message: `Error : ${err}` });
+  }
+}
+
+async function registerUserToTenant(req, res) {}
+
+module.exports = { userLogin, getUserProfile, registerUserToTenant };

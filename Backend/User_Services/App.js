@@ -6,12 +6,13 @@ const dotenv = require('dotenv');
 const LoginRouter = require('./Routers/Login.routes.js');
 const adminlogin = require('./Controllers/adminController');
 const TenantController = require('./Controllers/TenantController.js');
-
+const cookies = require('cookie-parser')
 
 
 
 app.use(express.json())
 app.use(cors())
+app.use(cookies())
 dotenv.config()
 
 const SERVICE_PORT = process.env.USER_SERVICE_PORT ||4000 ;
