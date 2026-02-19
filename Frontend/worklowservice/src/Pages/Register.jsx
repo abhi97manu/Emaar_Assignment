@@ -6,7 +6,7 @@ import axios from "axios";
 
 const server_url = import.meta.env.VITE_SERVER_URL;
 const Register = () => {
-  const { data, error } = useGetApiCall("tenantList");
+  const { data, error } = useGetApiCall("api/tenantList");
   const [loading, setLoading] = useState(false);
 
     
@@ -120,25 +120,7 @@ const Register = () => {
             </div>
           </div>
           <div class="grid md:grid-cols-2 md:gap-6">
-            {/* <div class="relative z-0 w-full mb-5 group">
-              <input
-                type="number"
-                name="floating_empid"
-                id="floating_empid"
-                class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer"
-                placeholder=" "
-                {...register("empid", { required: true, unique: true })}
-              />
-              <label
-                for="floating_empid"
-                class="absolute text-sm text-body duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-              >
-                Employee ID
-              </label>
-              {errors.empid && (
-                <span className="text-sm text-red-400">This is required</span>
-              )}
-            </div> */}
+       
             <div class="relative z-0 w-full mb-5 group">
               {data ? (
                 data.data.map((value) => {
@@ -159,20 +141,7 @@ const Register = () => {
                 <label>No Companies</label>
               )}
 
-             
-              {/* <datalist id="tenants">
-                {data ? (
-                  data.data.map((value) => {
-                    return (
-                      <option value={`${value.id}`} key={`${value.id}`}>
-                        {value.name}
-                      </option>
-                    );
-                  })
-                ) : (
-                  <option> Loading </option>
-                )}
-              </datalist> */}
+           
             </div>
           </div>
           <button

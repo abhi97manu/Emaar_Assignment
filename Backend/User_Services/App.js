@@ -3,24 +3,31 @@ const app = require('./Server.js')
 const cors = require('cors')
 const RegisterRoute = require('./Routers/Register.Router.js');
 const dotenv = require('dotenv');
-const LoginRouter = require('./Routers/Login.routes.js');
+
 const adminlogin = require('./Controllers/adminController');
-const TenantController = require('./Controllers/TenantController.js');
-const cookies = require('cookie-parser')
+// const {TenantController} = require('./Controllers/TenantController.js');
+const cookies = require('cookie-parser');
+const UserRouter = require('./Routers/User.Route.js');
+const TenantRouter = require('./Routers/TenantRouter.js');
 
-
+app.use(cors(
+   { origin : "http://localhost:5173",
+     credentials: true
+   }
+))
 
 app.use(express.json())
-app.use(cors())
+
 app.use(cookies())
 dotenv.config()
 
 const SERVICE_PORT = process.env.USER_SERVICE_PORT ||4000 ;
 
-app.get(`/tenantList`, TenantController)
+// app.get(`/tenantList`, TenantController)
 app.use(`/api`, RegisterRoute)
 
-app.use(`/user`, LoginRouter)
+app.use(`/user`, UserRouter)
+app.use(`/tenant`,TenantRouter)
 app.use(`/adminlogin`, adminlogin)
 
 

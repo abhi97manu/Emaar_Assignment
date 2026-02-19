@@ -1,7 +1,9 @@
 const prisma = require("../DB/Prisma.DB");
 const bcrypt = require(`bcrypt`);
 
+
 const jwt = require("jsonwebtoken");
+const getPrismaClient = require("../DB/TenantClient");
 
 // Any user can access it, to use this service
 
@@ -19,11 +21,8 @@ async function userLogin(req, res) {
           process.env.JWT_SECRET,
           { expiresIn: "1h" },
         );
-        res.cookie("activateToken", setCookies, {
-          httpOnly: true,
-          secure: true,
-        });
-        res.status(200).send({ message: "Logged In" });
+      
+        res.status(200).cookie("activateToken", setCookies).send({ message: "Login successful" });
       }
     } else {
       res.status(403).send({ message: "Forbidden" });
@@ -41,7 +40,7 @@ async function getUserProfile(req, res) {
     const userProfile = await prisma.user.findFirst({
       where: { email: email },
     });
-    res.status(200).send({ userProfile });
+    res.status(200).send(userProfile );
   } catch (err) {
     res.status(500).send({ message: `Error : ${err}` });
   }
@@ -49,4 +48,21 @@ async function getUserProfile(req, res) {
 
 async function registerUserToTenant(req, res) {}
 
-module.exports = { userLogin, getUserProfile, registerUserToTenant };
+
+async function getSelectedTenant(tenantid) {
+    const tenantId = Number(tenantid)
+   try{
+    const tenantUrl = await prisma.tenants.findFirst({
+        where : {tenant_id : tenantId}
+    })
+
+   return tenantUrl
+   }
+   catch(err)
+   {
+    return err
+   }
+
+}
+
+module.exports = { userLogin, getUserProfile, registerUserToTenant, getSelectedTenant };

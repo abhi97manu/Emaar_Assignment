@@ -33,4 +33,21 @@ async function RegisterUser(req, res) {
   }
 }
 
-module.exports = RegisterUser;
+
+ async function getTenants(req,res){
+  try{
+
+       const data = await prisma.tenants.findMany()
+      
+        res.status(200).send(data)
+        
+
+   }catch(erorr)
+    {
+            console.log(erorr);
+            
+     }
+ }
+
+
+module.exports = {  RegisterUser, getTenants};

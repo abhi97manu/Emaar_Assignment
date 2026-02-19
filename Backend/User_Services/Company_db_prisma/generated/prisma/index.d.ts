@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Role = $Result.DefaultSelection<Prisma.$RolePayload>
+/**
+ * Model Tasks
+ * 
+ */
+export type Tasks = $Result.DefaultSelection<Prisma.$TasksPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -161,6 +166,16 @@ export class PrismaClient<
     * ```
     */
   get role(): Prisma.RoleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tasks`: Exposes CRUD operations for the **Tasks** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tasks
+    * const tasks = await prisma.tasks.findMany()
+    * ```
+    */
+  get tasks(): Prisma.TasksDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -603,7 +618,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Role: 'Role'
+    Role: 'Role',
+    Tasks: 'Tasks'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -622,7 +638,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "role"
+      modelProps: "user" | "role" | "tasks"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -774,6 +790,80 @@ export namespace Prisma {
           }
         }
       }
+      Tasks: {
+        payload: Prisma.$TasksPayload<ExtArgs>
+        fields: Prisma.TasksFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TasksFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TasksFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload>
+          }
+          findFirst: {
+            args: Prisma.TasksFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TasksFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload>
+          }
+          findMany: {
+            args: Prisma.TasksFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload>[]
+          }
+          create: {
+            args: Prisma.TasksCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload>
+          }
+          createMany: {
+            args: Prisma.TasksCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TasksCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload>[]
+          }
+          delete: {
+            args: Prisma.TasksDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload>
+          }
+          update: {
+            args: Prisma.TasksUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload>
+          }
+          deleteMany: {
+            args: Prisma.TasksDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TasksUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TasksUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload>[]
+          }
+          upsert: {
+            args: Prisma.TasksUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TasksPayload>
+          }
+          aggregate: {
+            args: Prisma.TasksAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTasks>
+          }
+          groupBy: {
+            args: Prisma.TasksGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TasksGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TasksCountArgs<ExtArgs>
+            result: $Utils.Optional<TasksCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -872,6 +962,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     role?: RoleOmit
+    tasks?: TasksOmit
   }
 
   /* Types for Logging */
@@ -965,80 +1056,78 @@ export namespace Prisma {
   }
 
   export type UserAvgAggregateOutputType = {
+    id: number | null
     empId: number | null
   }
 
   export type UserSumAggregateOutputType = {
+    id: number | null
     empId: number | null
   }
 
   export type UserMinAggregateOutputType = {
+    id: number | null
     firstname: string | null
     lastname: string | null
     email: string | null
-    password: string | null
     empId: number | null
-    company: string | null
     role: string | null
   }
 
   export type UserMaxAggregateOutputType = {
+    id: number | null
     firstname: string | null
     lastname: string | null
     email: string | null
-    password: string | null
     empId: number | null
-    company: string | null
     role: string | null
   }
 
   export type UserCountAggregateOutputType = {
+    id: number
     firstname: number
     lastname: number
     email: number
-    password: number
     empId: number
-    company: number
     role: number
     _all: number
   }
 
 
   export type UserAvgAggregateInputType = {
+    id?: true
     empId?: true
   }
 
   export type UserSumAggregateInputType = {
+    id?: true
     empId?: true
   }
 
   export type UserMinAggregateInputType = {
+    id?: true
     firstname?: true
     lastname?: true
     email?: true
-    password?: true
     empId?: true
-    company?: true
     role?: true
   }
 
   export type UserMaxAggregateInputType = {
+    id?: true
     firstname?: true
     lastname?: true
     email?: true
-    password?: true
     empId?: true
-    company?: true
     role?: true
   }
 
   export type UserCountAggregateInputType = {
+    id?: true
     firstname?: true
     lastname?: true
     email?: true
-    password?: true
     empId?: true
-    company?: true
     role?: true
     _all?: true
   }
@@ -1130,12 +1219,11 @@ export namespace Prisma {
   }
 
   export type UserGroupByOutputType = {
+    id: number
     firstname: string
     lastname: string
     email: string
-    password: string
     empId: number
-    company: string
     role: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -1159,57 +1247,52 @@ export namespace Prisma {
 
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     firstname?: boolean
     lastname?: boolean
     email?: boolean
-    password?: boolean
     empId?: boolean
-    company?: boolean
     role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     firstname?: boolean
     lastname?: boolean
     email?: boolean
-    password?: boolean
     empId?: boolean
-    company?: boolean
     role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     firstname?: boolean
     lastname?: boolean
     email?: boolean
-    password?: boolean
     empId?: boolean
-    company?: boolean
     role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
+    id?: boolean
     firstname?: boolean
     lastname?: boolean
     email?: boolean
-    password?: boolean
     empId?: boolean
-    company?: boolean
     role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"firstname" | "lastname" | "email" | "password" | "empId" | "company" | "role", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstname" | "lastname" | "email" | "empId" | "role", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
+      id: number
       firstname: string
       lastname: string
       email: string
-      password: string
       empId: number
-      company: string
       role: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -1294,8 +1377,8 @@ export namespace Prisma {
      * // Get first 10 Users
      * const users = await prisma.user.findMany({ take: 10 })
      * 
-     * // Only select the `firstname`
-     * const userWithFirstnameOnly = await prisma.user.findMany({ select: { firstname: true } })
+     * // Only select the `id`
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1339,9 +1422,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Users and only return the `firstname`
-     * const userWithFirstnameOnly = await prisma.user.createManyAndReturn({
-     *   select: { firstname: true },
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({
+     *   select: { id: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -1430,9 +1513,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Users and only return the `firstname`
-     * const userWithFirstnameOnly = await prisma.user.updateManyAndReturn({
-     *   select: { firstname: true },
+     * // Update zero or more Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+     *   select: { id: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1634,12 +1717,11 @@ export namespace Prisma {
    * Fields of the User model
    */
   interface UserFieldRefs {
+    readonly id: FieldRef<"User", 'Int'>
     readonly firstname: FieldRef<"User", 'String'>
     readonly lastname: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
     readonly empId: FieldRef<"User", 'Int'>
-    readonly company: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'String'>
   }
     
@@ -2998,6 +3080,1060 @@ export namespace Prisma {
 
 
   /**
+   * Model Tasks
+   */
+
+  export type AggregateTasks = {
+    _count: TasksCountAggregateOutputType | null
+    _avg: TasksAvgAggregateOutputType | null
+    _sum: TasksSumAggregateOutputType | null
+    _min: TasksMinAggregateOutputType | null
+    _max: TasksMaxAggregateOutputType | null
+  }
+
+  export type TasksAvgAggregateOutputType = {
+    task_id: number | null
+    assigned_to: number | null
+    created_by: number | null
+    role_id: number | null
+  }
+
+  export type TasksSumAggregateOutputType = {
+    task_id: number | null
+    assigned_to: number | null
+    created_by: number | null
+    role_id: number | null
+  }
+
+  export type TasksMinAggregateOutputType = {
+    task_id: number | null
+    title: string | null
+    status: string | null
+    assigned_to: number | null
+    created_by: number | null
+    role_id: number | null
+  }
+
+  export type TasksMaxAggregateOutputType = {
+    task_id: number | null
+    title: string | null
+    status: string | null
+    assigned_to: number | null
+    created_by: number | null
+    role_id: number | null
+  }
+
+  export type TasksCountAggregateOutputType = {
+    task_id: number
+    title: number
+    status: number
+    assigned_to: number
+    created_by: number
+    role_id: number
+    _all: number
+  }
+
+
+  export type TasksAvgAggregateInputType = {
+    task_id?: true
+    assigned_to?: true
+    created_by?: true
+    role_id?: true
+  }
+
+  export type TasksSumAggregateInputType = {
+    task_id?: true
+    assigned_to?: true
+    created_by?: true
+    role_id?: true
+  }
+
+  export type TasksMinAggregateInputType = {
+    task_id?: true
+    title?: true
+    status?: true
+    assigned_to?: true
+    created_by?: true
+    role_id?: true
+  }
+
+  export type TasksMaxAggregateInputType = {
+    task_id?: true
+    title?: true
+    status?: true
+    assigned_to?: true
+    created_by?: true
+    role_id?: true
+  }
+
+  export type TasksCountAggregateInputType = {
+    task_id?: true
+    title?: true
+    status?: true
+    assigned_to?: true
+    created_by?: true
+    role_id?: true
+    _all?: true
+  }
+
+  export type TasksAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tasks to aggregate.
+     */
+    where?: TasksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tasks to fetch.
+     */
+    orderBy?: TasksOrderByWithRelationInput | TasksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TasksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Tasks
+    **/
+    _count?: true | TasksCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TasksAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TasksSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TasksMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TasksMaxAggregateInputType
+  }
+
+  export type GetTasksAggregateType<T extends TasksAggregateArgs> = {
+        [P in keyof T & keyof AggregateTasks]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTasks[P]>
+      : GetScalarType<T[P], AggregateTasks[P]>
+  }
+
+
+
+
+  export type TasksGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TasksWhereInput
+    orderBy?: TasksOrderByWithAggregationInput | TasksOrderByWithAggregationInput[]
+    by: TasksScalarFieldEnum[] | TasksScalarFieldEnum
+    having?: TasksScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TasksCountAggregateInputType | true
+    _avg?: TasksAvgAggregateInputType
+    _sum?: TasksSumAggregateInputType
+    _min?: TasksMinAggregateInputType
+    _max?: TasksMaxAggregateInputType
+  }
+
+  export type TasksGroupByOutputType = {
+    task_id: number
+    title: string
+    status: string
+    assigned_to: number
+    created_by: number
+    role_id: number
+    _count: TasksCountAggregateOutputType | null
+    _avg: TasksAvgAggregateOutputType | null
+    _sum: TasksSumAggregateOutputType | null
+    _min: TasksMinAggregateOutputType | null
+    _max: TasksMaxAggregateOutputType | null
+  }
+
+  type GetTasksGroupByPayload<T extends TasksGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TasksGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TasksGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TasksGroupByOutputType[P]>
+            : GetScalarType<T[P], TasksGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TasksSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    task_id?: boolean
+    title?: boolean
+    status?: boolean
+    assigned_to?: boolean
+    created_by?: boolean
+    role_id?: boolean
+  }, ExtArgs["result"]["tasks"]>
+
+  export type TasksSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    task_id?: boolean
+    title?: boolean
+    status?: boolean
+    assigned_to?: boolean
+    created_by?: boolean
+    role_id?: boolean
+  }, ExtArgs["result"]["tasks"]>
+
+  export type TasksSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    task_id?: boolean
+    title?: boolean
+    status?: boolean
+    assigned_to?: boolean
+    created_by?: boolean
+    role_id?: boolean
+  }, ExtArgs["result"]["tasks"]>
+
+  export type TasksSelectScalar = {
+    task_id?: boolean
+    title?: boolean
+    status?: boolean
+    assigned_to?: boolean
+    created_by?: boolean
+    role_id?: boolean
+  }
+
+  export type TasksOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"task_id" | "title" | "status" | "assigned_to" | "created_by" | "role_id", ExtArgs["result"]["tasks"]>
+
+  export type $TasksPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Tasks"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      task_id: number
+      title: string
+      status: string
+      assigned_to: number
+      created_by: number
+      role_id: number
+    }, ExtArgs["result"]["tasks"]>
+    composites: {}
+  }
+
+  type TasksGetPayload<S extends boolean | null | undefined | TasksDefaultArgs> = $Result.GetResult<Prisma.$TasksPayload, S>
+
+  type TasksCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TasksFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TasksCountAggregateInputType | true
+    }
+
+  export interface TasksDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tasks'], meta: { name: 'Tasks' } }
+    /**
+     * Find zero or one Tasks that matches the filter.
+     * @param {TasksFindUniqueArgs} args - Arguments to find a Tasks
+     * @example
+     * // Get one Tasks
+     * const tasks = await prisma.tasks.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TasksFindUniqueArgs>(args: SelectSubset<T, TasksFindUniqueArgs<ExtArgs>>): Prisma__TasksClient<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Tasks that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TasksFindUniqueOrThrowArgs} args - Arguments to find a Tasks
+     * @example
+     * // Get one Tasks
+     * const tasks = await prisma.tasks.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TasksFindUniqueOrThrowArgs>(args: SelectSubset<T, TasksFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TasksClient<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TasksFindFirstArgs} args - Arguments to find a Tasks
+     * @example
+     * // Get one Tasks
+     * const tasks = await prisma.tasks.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TasksFindFirstArgs>(args?: SelectSubset<T, TasksFindFirstArgs<ExtArgs>>): Prisma__TasksClient<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tasks that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TasksFindFirstOrThrowArgs} args - Arguments to find a Tasks
+     * @example
+     * // Get one Tasks
+     * const tasks = await prisma.tasks.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TasksFindFirstOrThrowArgs>(args?: SelectSubset<T, TasksFindFirstOrThrowArgs<ExtArgs>>): Prisma__TasksClient<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Tasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TasksFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tasks
+     * const tasks = await prisma.tasks.findMany()
+     * 
+     * // Get first 10 Tasks
+     * const tasks = await prisma.tasks.findMany({ take: 10 })
+     * 
+     * // Only select the `task_id`
+     * const tasksWithTask_idOnly = await prisma.tasks.findMany({ select: { task_id: true } })
+     * 
+     */
+    findMany<T extends TasksFindManyArgs>(args?: SelectSubset<T, TasksFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Tasks.
+     * @param {TasksCreateArgs} args - Arguments to create a Tasks.
+     * @example
+     * // Create one Tasks
+     * const Tasks = await prisma.tasks.create({
+     *   data: {
+     *     // ... data to create a Tasks
+     *   }
+     * })
+     * 
+     */
+    create<T extends TasksCreateArgs>(args: SelectSubset<T, TasksCreateArgs<ExtArgs>>): Prisma__TasksClient<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Tasks.
+     * @param {TasksCreateManyArgs} args - Arguments to create many Tasks.
+     * @example
+     * // Create many Tasks
+     * const tasks = await prisma.tasks.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TasksCreateManyArgs>(args?: SelectSubset<T, TasksCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Tasks and returns the data saved in the database.
+     * @param {TasksCreateManyAndReturnArgs} args - Arguments to create many Tasks.
+     * @example
+     * // Create many Tasks
+     * const tasks = await prisma.tasks.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Tasks and only return the `task_id`
+     * const tasksWithTask_idOnly = await prisma.tasks.createManyAndReturn({
+     *   select: { task_id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TasksCreateManyAndReturnArgs>(args?: SelectSubset<T, TasksCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Tasks.
+     * @param {TasksDeleteArgs} args - Arguments to delete one Tasks.
+     * @example
+     * // Delete one Tasks
+     * const Tasks = await prisma.tasks.delete({
+     *   where: {
+     *     // ... filter to delete one Tasks
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TasksDeleteArgs>(args: SelectSubset<T, TasksDeleteArgs<ExtArgs>>): Prisma__TasksClient<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Tasks.
+     * @param {TasksUpdateArgs} args - Arguments to update one Tasks.
+     * @example
+     * // Update one Tasks
+     * const tasks = await prisma.tasks.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TasksUpdateArgs>(args: SelectSubset<T, TasksUpdateArgs<ExtArgs>>): Prisma__TasksClient<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Tasks.
+     * @param {TasksDeleteManyArgs} args - Arguments to filter Tasks to delete.
+     * @example
+     * // Delete a few Tasks
+     * const { count } = await prisma.tasks.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TasksDeleteManyArgs>(args?: SelectSubset<T, TasksDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TasksUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tasks
+     * const tasks = await prisma.tasks.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TasksUpdateManyArgs>(args: SelectSubset<T, TasksUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tasks and returns the data updated in the database.
+     * @param {TasksUpdateManyAndReturnArgs} args - Arguments to update many Tasks.
+     * @example
+     * // Update many Tasks
+     * const tasks = await prisma.tasks.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Tasks and only return the `task_id`
+     * const tasksWithTask_idOnly = await prisma.tasks.updateManyAndReturn({
+     *   select: { task_id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TasksUpdateManyAndReturnArgs>(args: SelectSubset<T, TasksUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Tasks.
+     * @param {TasksUpsertArgs} args - Arguments to update or create a Tasks.
+     * @example
+     * // Update or create a Tasks
+     * const tasks = await prisma.tasks.upsert({
+     *   create: {
+     *     // ... data to create a Tasks
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tasks we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TasksUpsertArgs>(args: SelectSubset<T, TasksUpsertArgs<ExtArgs>>): Prisma__TasksClient<$Result.GetResult<Prisma.$TasksPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Tasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TasksCountArgs} args - Arguments to filter Tasks to count.
+     * @example
+     * // Count the number of Tasks
+     * const count = await prisma.tasks.count({
+     *   where: {
+     *     // ... the filter for the Tasks we want to count
+     *   }
+     * })
+    **/
+    count<T extends TasksCountArgs>(
+      args?: Subset<T, TasksCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TasksCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TasksAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TasksAggregateArgs>(args: Subset<T, TasksAggregateArgs>): Prisma.PrismaPromise<GetTasksAggregateType<T>>
+
+    /**
+     * Group by Tasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TasksGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TasksGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TasksGroupByArgs['orderBy'] }
+        : { orderBy?: TasksGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TasksGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTasksGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Tasks model
+   */
+  readonly fields: TasksFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Tasks.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TasksClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Tasks model
+   */
+  interface TasksFieldRefs {
+    readonly task_id: FieldRef<"Tasks", 'Int'>
+    readonly title: FieldRef<"Tasks", 'String'>
+    readonly status: FieldRef<"Tasks", 'String'>
+    readonly assigned_to: FieldRef<"Tasks", 'Int'>
+    readonly created_by: FieldRef<"Tasks", 'Int'>
+    readonly role_id: FieldRef<"Tasks", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Tasks findUnique
+   */
+  export type TasksFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * Filter, which Tasks to fetch.
+     */
+    where: TasksWhereUniqueInput
+  }
+
+  /**
+   * Tasks findUniqueOrThrow
+   */
+  export type TasksFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * Filter, which Tasks to fetch.
+     */
+    where: TasksWhereUniqueInput
+  }
+
+  /**
+   * Tasks findFirst
+   */
+  export type TasksFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * Filter, which Tasks to fetch.
+     */
+    where?: TasksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tasks to fetch.
+     */
+    orderBy?: TasksOrderByWithRelationInput | TasksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tasks.
+     */
+    cursor?: TasksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tasks.
+     */
+    distinct?: TasksScalarFieldEnum | TasksScalarFieldEnum[]
+  }
+
+  /**
+   * Tasks findFirstOrThrow
+   */
+  export type TasksFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * Filter, which Tasks to fetch.
+     */
+    where?: TasksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tasks to fetch.
+     */
+    orderBy?: TasksOrderByWithRelationInput | TasksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tasks.
+     */
+    cursor?: TasksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tasks.
+     */
+    distinct?: TasksScalarFieldEnum | TasksScalarFieldEnum[]
+  }
+
+  /**
+   * Tasks findMany
+   */
+  export type TasksFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * Filter, which Tasks to fetch.
+     */
+    where?: TasksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tasks to fetch.
+     */
+    orderBy?: TasksOrderByWithRelationInput | TasksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Tasks.
+     */
+    cursor?: TasksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tasks.
+     */
+    skip?: number
+    distinct?: TasksScalarFieldEnum | TasksScalarFieldEnum[]
+  }
+
+  /**
+   * Tasks create
+   */
+  export type TasksCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Tasks.
+     */
+    data: XOR<TasksCreateInput, TasksUncheckedCreateInput>
+  }
+
+  /**
+   * Tasks createMany
+   */
+  export type TasksCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Tasks.
+     */
+    data: TasksCreateManyInput | TasksCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tasks createManyAndReturn
+   */
+  export type TasksCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * The data used to create many Tasks.
+     */
+    data: TasksCreateManyInput | TasksCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tasks update
+   */
+  export type TasksUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Tasks.
+     */
+    data: XOR<TasksUpdateInput, TasksUncheckedUpdateInput>
+    /**
+     * Choose, which Tasks to update.
+     */
+    where: TasksWhereUniqueInput
+  }
+
+  /**
+   * Tasks updateMany
+   */
+  export type TasksUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Tasks.
+     */
+    data: XOR<TasksUpdateManyMutationInput, TasksUncheckedUpdateManyInput>
+    /**
+     * Filter which Tasks to update
+     */
+    where?: TasksWhereInput
+    /**
+     * Limit how many Tasks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tasks updateManyAndReturn
+   */
+  export type TasksUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * The data used to update Tasks.
+     */
+    data: XOR<TasksUpdateManyMutationInput, TasksUncheckedUpdateManyInput>
+    /**
+     * Filter which Tasks to update
+     */
+    where?: TasksWhereInput
+    /**
+     * Limit how many Tasks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tasks upsert
+   */
+  export type TasksUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Tasks to update in case it exists.
+     */
+    where: TasksWhereUniqueInput
+    /**
+     * In case the Tasks found by the `where` argument doesn't exist, create a new Tasks with this data.
+     */
+    create: XOR<TasksCreateInput, TasksUncheckedCreateInput>
+    /**
+     * In case the Tasks was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TasksUpdateInput, TasksUncheckedUpdateInput>
+  }
+
+  /**
+   * Tasks delete
+   */
+  export type TasksDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+    /**
+     * Filter which Tasks to delete.
+     */
+    where: TasksWhereUniqueInput
+  }
+
+  /**
+   * Tasks deleteMany
+   */
+  export type TasksDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tasks to delete
+     */
+    where?: TasksWhereInput
+    /**
+     * Limit how many Tasks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tasks without action
+   */
+  export type TasksDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tasks
+     */
+    select?: TasksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tasks
+     */
+    omit?: TasksOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3012,12 +4148,11 @@ export namespace Prisma {
 
 
   export const UserScalarFieldEnum: {
+    id: 'id',
     firstname: 'firstname',
     lastname: 'lastname',
     email: 'email',
-    password: 'password',
     empId: 'empId',
-    company: 'company',
     role: 'role'
   };
 
@@ -3030,6 +4165,18 @@ export namespace Prisma {
   };
 
   export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+  export const TasksScalarFieldEnum: {
+    task_id: 'task_id',
+    title: 'title',
+    status: 'status',
+    assigned_to: 'assigned_to',
+    created_by: 'created_by',
+    role_id: 'role_id'
+  };
+
+  export type TasksScalarFieldEnum = (typeof TasksScalarFieldEnum)[keyof typeof TasksScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3062,20 +4209,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'String'
-   */
-  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
-
-
-  /**
-   * Reference to a field of type 'String[]'
-   */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -3086,6 +4219,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'String'
+   */
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
     
 
 
@@ -3110,26 +4257,25 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    id?: IntFilter<"User"> | number
     firstname?: StringFilter<"User"> | string
     lastname?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
     empId?: IntFilter<"User"> | number
-    company?: StringFilter<"User"> | string
     role?: StringNullableFilter<"User"> | string | null
   }
 
   export type UserOrderByWithRelationInput = {
+    id?: SortOrder
     firstname?: SortOrder
     lastname?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     empId?: SortOrder
-    company?: SortOrder
     role?: SortOrderInput | SortOrder
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
     email?: string
     empId?: number
     AND?: UserWhereInput | UserWhereInput[]
@@ -3137,18 +4283,15 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     firstname?: StringFilter<"User"> | string
     lastname?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    company?: StringFilter<"User"> | string
     role?: StringNullableFilter<"User"> | string | null
-  }, "email" | "empId">
+  }, "id" | "email" | "empId">
 
   export type UserOrderByWithAggregationInput = {
+    id?: SortOrder
     firstname?: SortOrder
     lastname?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     empId?: SortOrder
-    company?: SortOrder
     role?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -3161,12 +4304,11 @@ export namespace Prisma {
     AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"User"> | number
     firstname?: StringWithAggregatesFilter<"User"> | string
     lastname?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
     empId?: IntWithAggregatesFilter<"User"> | number
-    company?: StringWithAggregatesFilter<"User"> | string
     role?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
@@ -3209,23 +4351,79 @@ export namespace Prisma {
     role?: StringWithAggregatesFilter<"Role"> | string
   }
 
+  export type TasksWhereInput = {
+    AND?: TasksWhereInput | TasksWhereInput[]
+    OR?: TasksWhereInput[]
+    NOT?: TasksWhereInput | TasksWhereInput[]
+    task_id?: IntFilter<"Tasks"> | number
+    title?: StringFilter<"Tasks"> | string
+    status?: StringFilter<"Tasks"> | string
+    assigned_to?: IntFilter<"Tasks"> | number
+    created_by?: IntFilter<"Tasks"> | number
+    role_id?: IntFilter<"Tasks"> | number
+  }
+
+  export type TasksOrderByWithRelationInput = {
+    task_id?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    assigned_to?: SortOrder
+    created_by?: SortOrder
+    role_id?: SortOrder
+  }
+
+  export type TasksWhereUniqueInput = Prisma.AtLeast<{
+    task_id?: number
+    AND?: TasksWhereInput | TasksWhereInput[]
+    OR?: TasksWhereInput[]
+    NOT?: TasksWhereInput | TasksWhereInput[]
+    title?: StringFilter<"Tasks"> | string
+    status?: StringFilter<"Tasks"> | string
+    assigned_to?: IntFilter<"Tasks"> | number
+    created_by?: IntFilter<"Tasks"> | number
+    role_id?: IntFilter<"Tasks"> | number
+  }, "task_id">
+
+  export type TasksOrderByWithAggregationInput = {
+    task_id?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    assigned_to?: SortOrder
+    created_by?: SortOrder
+    role_id?: SortOrder
+    _count?: TasksCountOrderByAggregateInput
+    _avg?: TasksAvgOrderByAggregateInput
+    _max?: TasksMaxOrderByAggregateInput
+    _min?: TasksMinOrderByAggregateInput
+    _sum?: TasksSumOrderByAggregateInput
+  }
+
+  export type TasksScalarWhereWithAggregatesInput = {
+    AND?: TasksScalarWhereWithAggregatesInput | TasksScalarWhereWithAggregatesInput[]
+    OR?: TasksScalarWhereWithAggregatesInput[]
+    NOT?: TasksScalarWhereWithAggregatesInput | TasksScalarWhereWithAggregatesInput[]
+    task_id?: IntWithAggregatesFilter<"Tasks"> | number
+    title?: StringWithAggregatesFilter<"Tasks"> | string
+    status?: StringWithAggregatesFilter<"Tasks"> | string
+    assigned_to?: IntWithAggregatesFilter<"Tasks"> | number
+    created_by?: IntWithAggregatesFilter<"Tasks"> | number
+    role_id?: IntWithAggregatesFilter<"Tasks"> | number
+  }
+
   export type UserCreateInput = {
     firstname: string
     lastname: string
     email: string
-    password: string
     empId: number
-    company?: string
     role?: string | null
   }
 
   export type UserUncheckedCreateInput = {
+    id?: number
     firstname: string
     lastname: string
     email: string
-    password: string
     empId: number
-    company?: string
     role?: string | null
   }
 
@@ -3233,29 +4431,25 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     empId?: IntFieldUpdateOperationsInput | number
-    company?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     empId?: IntFieldUpdateOperationsInput | number
-    company?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateManyInput = {
+    id?: number
     firstname: string
     lastname: string
     email: string
-    password: string
     empId: number
-    company?: string
     role?: string | null
   }
 
@@ -3263,19 +4457,16 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     empId?: IntFieldUpdateOperationsInput | number
-    company?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     empId?: IntFieldUpdateOperationsInput | number
-    company?: StringFieldUpdateOperationsInput | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -3311,6 +4502,77 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
   }
 
+  export type TasksCreateInput = {
+    title: string
+    status: string
+    assigned_to: number
+    created_by: number
+    role_id: number
+  }
+
+  export type TasksUncheckedCreateInput = {
+    task_id?: number
+    title: string
+    status: string
+    assigned_to: number
+    created_by: number
+    role_id: number
+  }
+
+  export type TasksUpdateInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    assigned_to?: IntFieldUpdateOperationsInput | number
+    created_by?: IntFieldUpdateOperationsInput | number
+    role_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TasksUncheckedUpdateInput = {
+    task_id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    assigned_to?: IntFieldUpdateOperationsInput | number
+    created_by?: IntFieldUpdateOperationsInput | number
+    role_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TasksCreateManyInput = {
+    task_id?: number
+    title: string
+    status: string
+    assigned_to: number
+    created_by: number
+    role_id: number
+  }
+
+  export type TasksUpdateManyMutationInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    assigned_to?: IntFieldUpdateOperationsInput | number
+    created_by?: IntFieldUpdateOperationsInput | number
+    role_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TasksUncheckedUpdateManyInput = {
+    task_id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    assigned_to?: IntFieldUpdateOperationsInput | number
+    created_by?: IntFieldUpdateOperationsInput | number
+    role_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3324,17 +4586,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -3358,41 +4609,56 @@ export namespace Prisma {
   }
 
   export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
     firstname?: SortOrder
     lastname?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     empId?: SortOrder
-    company?: SortOrder
     role?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
+    id?: SortOrder
     empId?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
     firstname?: SortOrder
     lastname?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     empId?: SortOrder
-    company?: SortOrder
     role?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
     firstname?: SortOrder
     lastname?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     empId?: SortOrder
-    company?: SortOrder
     role?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
+    id?: SortOrder
     empId?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -3411,22 +4677,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -3470,6 +4720,47 @@ export namespace Prisma {
     role_id?: SortOrder
   }
 
+  export type TasksCountOrderByAggregateInput = {
+    task_id?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    assigned_to?: SortOrder
+    created_by?: SortOrder
+    role_id?: SortOrder
+  }
+
+  export type TasksAvgOrderByAggregateInput = {
+    task_id?: SortOrder
+    assigned_to?: SortOrder
+    created_by?: SortOrder
+    role_id?: SortOrder
+  }
+
+  export type TasksMaxOrderByAggregateInput = {
+    task_id?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    assigned_to?: SortOrder
+    created_by?: SortOrder
+    role_id?: SortOrder
+  }
+
+  export type TasksMinOrderByAggregateInput = {
+    task_id?: SortOrder
+    title?: SortOrder
+    status?: SortOrder
+    assigned_to?: SortOrder
+    created_by?: SortOrder
+    role_id?: SortOrder
+  }
+
+  export type TasksSumOrderByAggregateInput = {
+    task_id?: SortOrder
+    assigned_to?: SortOrder
+    created_by?: SortOrder
+    role_id?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -3486,6 +4777,17 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -3500,17 +4802,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -3523,23 +4814,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3567,6 +4841,23 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {

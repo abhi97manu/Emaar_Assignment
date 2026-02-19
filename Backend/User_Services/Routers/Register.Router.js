@@ -1,12 +1,13 @@
 const express = require('express')
-// const prisma = require('../DB/Prisma.DB')
-const RegisterUser = require('../Controllers/RegisterController')
+//const prisma = require('../DB/Prisma.DB')
+const {RegisterUser,getTenants} = require('../Controllers/RegisterController')
 
 
 const RegisterRoute = express.Router()
 
 
 RegisterRoute.post(`/register`, RegisterUser)
+RegisterRoute.get(`/tenantList`,getTenants)
 
 
 // RegisterRoute.post(`/register_admin`,async(req, res)=>{

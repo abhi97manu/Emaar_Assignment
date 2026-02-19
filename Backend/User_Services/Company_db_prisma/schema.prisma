@@ -15,12 +15,11 @@ datasource db {
 }
 
 model User {
+  id Int @id @default(autoincrement())
   firstname String 
   lastname String
   email String @unique
-  password String 
-  empId Int @unique
-  company String @default("Company A")
+  empId Int @unique 
   role String?
 }
 
@@ -28,5 +27,14 @@ model User {
 model Role {
   role_id Int @id @default(autoincrement())
   role String @unique
+}
+
+model Tasks {
+  task_id Int @id @default(autoincrement())
+  title String
+  status String
+  assigned_to Int
+  created_by Int
+  role_id Int
 }
 
