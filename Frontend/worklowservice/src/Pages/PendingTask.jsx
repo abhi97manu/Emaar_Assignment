@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import { useGetApiCallWithTenant } from '../Utills/useGetApiCall';
 import { AppContext } from '../Context/ContextAPi';
+import { useParams } from 'react-router-dom';
 
 const PendingTask = () => {
-  const { tenantid } = useContext(AppContext);
-  console.log("Tasks Data:", tenantid);
-  const { data } = useGetApiCallWithTenant(`tenant/Pendingtasks`, tenantid);
+  const { tenantId } = useParams();
+  console.log("Tasks Data:", tenantId);
+  const { data } = useGetApiCallWithTenant(`tenant/Pendingtasks`, tenantId);
 
 
   return (

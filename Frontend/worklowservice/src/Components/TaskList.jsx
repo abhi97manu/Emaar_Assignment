@@ -8,11 +8,11 @@ const TaskList = ({values}) => {
     <>
        <div className="flex items-center justify-between p-4 bg-white shadow rounded-xl border">
      
-        <h3 className="text-lg font-semibold text-gray-800">{values?.title}</h3>
+        <h3 className="text-lg font-semibold text-gray-800">{values?.workflow_id}</h3>
         <span
           className={`inline-block mt-1 px-2 py-1 text-xs font-medium rounded-full `}
         >
-          {values?.status}
+          {values?.state_name}
         </span>
       
 

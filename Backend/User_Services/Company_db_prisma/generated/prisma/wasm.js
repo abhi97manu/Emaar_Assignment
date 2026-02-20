@@ -99,20 +99,33 @@ exports.Prisma.UserScalarFieldEnum = {
   lastname: 'lastname',
   email: 'email',
   empId: 'empId',
-  role: 'role'
+  role_id: 'role_id'
 };
 
 exports.Prisma.RoleScalarFieldEnum = {
   role_id: 'role_id',
-  role: 'role'
+  name: 'name'
 };
 
 exports.Prisma.TasksScalarFieldEnum = {
   task_id: 'task_id',
-  title: 'title',
-  status: 'status',
+  workflow_id: 'workflow_id',
+  state_name: 'state_name',
   assigned_to: 'assigned_to',
   created_by: 'created_by',
+  role_id: 'role_id'
+};
+
+exports.Prisma.WorkflowScalarFieldEnum = {
+  id: 'id',
+  workflow_name: 'workflow_name'
+};
+
+exports.Prisma.Workflow_RulesScalarFieldEnum = {
+  id: 'id',
+  workflow_id: 'workflow_id',
+  state_1: 'state_1',
+  state_2: 'state_2',
   role_id: 'role_id'
 };
 
@@ -135,7 +148,9 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
-  Tasks: 'Tasks'
+  Tasks: 'Tasks',
+  Workflow: 'Workflow',
+  Workflow_Rules: 'Workflow_Rules'
 };
 /**
  * Create the Client
@@ -184,13 +199,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../Company_db_prisma/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"COMPANY_DATABASE_URL\")\n}\n\nmodel User {\n  id        Int     @id @default(autoincrement())\n  firstname String\n  lastname  String\n  email     String  @unique\n  empId     Int     @unique\n  role      String?\n}\n\nmodel Role {\n  role_id Int    @id @default(autoincrement())\n  role    String @unique\n}\n\nmodel Tasks {\n  task_id     Int    @id @default(autoincrement())\n  title       String\n  status      String\n  assigned_to Int\n  created_by  Int\n  role_id     Int\n}\n",
-  "inlineSchemaHash": "a65bfd831aedd2b2618a0d692a50368c1afa48fb619affce263bb5133e6b0306",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../Company_db_prisma/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"COMPANY_DATABASE_URL\")\n}\n\nmodel User {\n  id        Int     @id @default(autoincrement())\n  firstname String\n  lastname  String?\n  email     String  @unique\n  empId     Int     @unique\n  role_id   Int?\n  role      Role?   @relation(fields: [role_id], references: [role_id])\n\n  task Tasks[]\n}\n\nmodel Role {\n  role_id Int     @id @default(autoincrement())\n  name    String? @unique\n\n  task Tasks[]\n  user User[]\n}\n\nmodel Tasks {\n  task_id     Int      @id @default(autoincrement())\n  workflow_id Int\n  workflow    Workflow @relation(fields: [workflow_id], references: [id])\n  state_name  String?\n  assigned_to Int\n  user        User?    @relation(fields: [assigned_to], references: [empId])\n  created_by  Int?\n  role_id     Int\n  role        Role?    @relation(fields: [role_id], references: [role_id])\n}\n\nmodel Workflow {\n  id            Int     @id @default(autoincrement())\n  workflow_name String? @unique\n\n  task  Tasks[]\n  rules Workflow_Rules[]\n}\n\nmodel Workflow_Rules {\n  id          Int       @id @default(autoincrement())\n  workflow_id Int\n  workflow    Workflow? @relation(fields: [workflow_id], references: [id])\n  state_1     String?\n  state_2     String?\n  role_id     Int\n}\n",
+  "inlineSchemaHash": "1b50a3bbb552b7880f27f5fb723f4b0bd8c69599988d3a26b4d6796dfc769d3c",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"firstname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"empId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Role\":{\"fields\":[{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Tasks\":{\"fields\":[{\"name\":\"task_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"assigned_to\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"created_by\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"firstname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"empId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"role\",\"kind\":\"object\",\"type\":\"Role\",\"relationName\":\"RoleToUser\"},{\"name\":\"task\",\"kind\":\"object\",\"type\":\"Tasks\",\"relationName\":\"TasksToUser\"}],\"dbName\":null},\"Role\":{\"fields\":[{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"task\",\"kind\":\"object\",\"type\":\"Tasks\",\"relationName\":\"RoleToTasks\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RoleToUser\"}],\"dbName\":null},\"Tasks\":{\"fields\":[{\"name\":\"task_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"workflow_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"workflow\",\"kind\":\"object\",\"type\":\"Workflow\",\"relationName\":\"TasksToWorkflow\"},{\"name\":\"state_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"assigned_to\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"TasksToUser\"},{\"name\":\"created_by\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"role\",\"kind\":\"object\",\"type\":\"Role\",\"relationName\":\"RoleToTasks\"}],\"dbName\":null},\"Workflow\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"workflow_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"task\",\"kind\":\"object\",\"type\":\"Tasks\",\"relationName\":\"TasksToWorkflow\"},{\"name\":\"rules\",\"kind\":\"object\",\"type\":\"Workflow_Rules\",\"relationName\":\"WorkflowToWorkflow_Rules\"}],\"dbName\":null},\"Workflow_Rules\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"workflow_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"workflow\",\"kind\":\"object\",\"type\":\"Workflow\",\"relationName\":\"WorkflowToWorkflow_Rules\"},{\"name\":\"state_1\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"state_2\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role_id\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

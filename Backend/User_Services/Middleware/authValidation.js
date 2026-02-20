@@ -8,7 +8,6 @@ async function authLoginUser(req, res, next) {
   }
   try {
     const decoded = jwt.verify(req.cookies.activateToken, process.env.JWT_SECRET);
-    
     req.email = decoded.email;
     next();
   } catch (err) {

@@ -4,6 +4,8 @@ import Login from "../Pages/Login";
 import Dashboard from "../Pages/Dashboard";
 import UserProfile from "../Pages/UserProfile";
 
+
+ 
 const Router = createBrowserRouter([
   {
     path: "/register",
@@ -20,7 +22,7 @@ const Router = createBrowserRouter([
       {
         path : "tenantRegister/:tenantId",
         index : true,
-        element : <UserProfile/>
+        element : <UserProfile />
       }
     ]
   },

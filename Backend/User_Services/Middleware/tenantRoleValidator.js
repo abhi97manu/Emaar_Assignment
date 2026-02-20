@@ -4,14 +4,17 @@ const jwt = require("jsonwebtoken");
     const tenatnID = req.headers['tenant-id'];
   
     const tenantToken = req.cookies[`tenantToken${tenatnID}`];
-
+        
     if (!tenantToken) {
         return res.status(401).send({ message: "Unauthorized: No tenant token provided" });
     }
     try {
         const decoded =  jwt.verify(tenantToken, process.env.TENANT_JWT_SECRET);
-        console.log("emp"  , decoded.empId);
+        console.log("emp"  , decoded.empId , ":", decoded.role_id);
+
+        console.log("role : ",req.body)
         req.empId = decoded.empId;
+        req.role_id = decoded.role_id
         
         next();
     } catch (err) {

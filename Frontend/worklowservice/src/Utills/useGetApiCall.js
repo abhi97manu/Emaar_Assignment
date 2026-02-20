@@ -12,7 +12,9 @@ export const useGetApiCall = (url) => {
     async function callAPi() {
       try {
         const response = await axios.get(`${server_url}${url}`,{withCredentials:true});
+       if(response.status ===200)
         setData(response);
+       
       } catch (error) {
         setError(error);
       } finally {
@@ -36,13 +38,50 @@ export const useGetApiCallWithTenant = (url, ten_id) => {
   
   useEffect(() => {
 
-    console.log(ten_id, "tenant id from useGetApiCallWithTenant");
+    console.log("calling get api with tenat", ten_id)
     async function callAPi() {
       try {
         const response = await axios.get(`${server_url}${url}`,{withCredentials:true, headers: {
           'tenant-id': ten_id
         }});
-        console.log(response, "response from useGetApiCallWithTenant");
+      
+        setData(response.data);
+
+       console.log(data)
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    callAPi();
+  }, [ten_id ,url]);
+
+
+
+  
+
+  return { data, loading, error };
+};
+
+
+
+export const usePostApiCallWithTenant = (url, ten_id, sendData) => {
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  
+  useEffect(() => {
+
+    
+    async function callAPi() {
+      try {
+        const response = await axios.post(`${server_url}${url}`,sendData,{withCredentials:true,
+           headers: {
+          'tenant-id': ten_id
+        }});
+       
         setData(response);
       } catch (error) {
         setError(error);
@@ -52,7 +91,12 @@ export const useGetApiCallWithTenant = (url, ten_id) => {
     }
 
     callAPi();
-  }, [ten_id]);
+  }, []);
+
+
+
+  
 
   return { data, loading, error };
 };
+

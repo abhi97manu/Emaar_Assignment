@@ -9,6 +9,7 @@ const adminlogin = require('./Controllers/adminController');
 const cookies = require('cookie-parser');
 const UserRouter = require('./Routers/User.Route.js');
 const TenantRouter = require('./Routers/TenantRouter.js');
+const adminRouter = require('./Routers/admin.Routes.js');
 
 app.use(cors(
    { origin : "http://localhost:5173",
@@ -28,7 +29,7 @@ app.use(`/api`, RegisterRoute)
 
 app.use(`/user`, UserRouter)
 app.use(`/tenant`,TenantRouter)
-app.use(`/adminlogin`, adminlogin)
+app.use(`/admin`, adminRouter)
 
 
 app.listen(SERVICE_PORT, ()=>{

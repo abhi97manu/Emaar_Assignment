@@ -127,20 +127,33 @@ exports.Prisma.UserScalarFieldEnum = {
   lastname: 'lastname',
   email: 'email',
   empId: 'empId',
-  role: 'role'
+  role_id: 'role_id'
 };
 
 exports.Prisma.RoleScalarFieldEnum = {
   role_id: 'role_id',
-  role: 'role'
+  name: 'name'
 };
 
 exports.Prisma.TasksScalarFieldEnum = {
   task_id: 'task_id',
-  title: 'title',
-  status: 'status',
+  workflow_id: 'workflow_id',
+  state_name: 'state_name',
   assigned_to: 'assigned_to',
   created_by: 'created_by',
+  role_id: 'role_id'
+};
+
+exports.Prisma.WorkflowScalarFieldEnum = {
+  id: 'id',
+  workflow_name: 'workflow_name'
+};
+
+exports.Prisma.Workflow_RulesScalarFieldEnum = {
+  id: 'id',
+  workflow_id: 'workflow_id',
+  state_1: 'state_1',
+  state_2: 'state_2',
   role_id: 'role_id'
 };
 
@@ -163,7 +176,9 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
-  Tasks: 'Tasks'
+  Tasks: 'Tasks',
+  Workflow: 'Workflow',
+  Workflow_Rules: 'Workflow_Rules'
 };
 
 /**

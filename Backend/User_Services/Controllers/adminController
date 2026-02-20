@@ -1,23 +1,64 @@
-const prisma = require(`../DB/Prisma.DB`);
-const bcrypt = require(`bcrypt`)
-
-async function adminloign(req, res) {
-  const { email, password } = req.body;
+async function addWorkflowRule(req, res) {
+  const prisma = req.prisma;
+  const role_id = req.role_id;
+  console.log("body : ", req.body);
+  const obj = req.body.find((i) => i.workFlowName);
+  const workflowname = obj?.workFlowName;
+  const ruledata = req.body.filter((i) => !i.workFlowName);
+  console.log("flwo name ", workflowname);
   try {
-    const adminUser = await prisma.admin.findFirst({ where: { email: email } });
+    if (role_id === 104) {
+      const respose = await prisma.workflow.create({
+        data: {
+          workflow_name: workflowname,
+        },
+      });
+      if (respose) {
+        res.status(200).send({ message: "Successfully entered Workflow" });
+      }
 
-    if (adminUser) {
-        const decodedUser = await bcrypt.compare(password,adminUser.password)
-        if(decodedUser)
-        {
-             console.log(adminUser.role);
-        }
-     
+      console.log("workflowname", workflowname);
+      const workflowId = await prisma.$queryRaw`
+  SELECT id FROM "Workflow" WHERE workflow_name = ${workflowname}
+`;
+
+      console.log(workflowId);
+      const response = await Promise.all(
+        ruledata.map(async (task, i) => {
+          if (task.initialState === null || task.aprroveby === null) {
+            return;
+          }
+          console.log(i, ";", task);
+
+          // const tables = await prisma.$queryRaw`
+          //   SELECT tablename FROM pg_tables WHERE schemaname = current_schema();
+          // `;
+
+          console.log(workflowId);
+          const roleid = await prisma.$queryRaw`
+  SELECT role_id FROM "Role" WHERE name = ${task.aprroveBy}
+`;
+
+          const response = await prisma.Workflow_Rules.create({
+            data: {
+              state_1: task.initialState,
+              role_id: roleid[0]?.role_id,
+              state_2: task.endState,
+              workflow_id: workflowId[0]?.id,
+            },
+          });
+          return response;
+        }),
+      );
+
+      if (response) {
+        res.status(200).send({ message: "Rule created " });
+      }
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "error adding Workflow", err: err });
   }
 }
 
-
-module.exports = adminloign
+module.exports = { addWorkflowRule };

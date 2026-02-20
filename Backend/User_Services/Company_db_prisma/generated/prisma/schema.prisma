@@ -17,22 +17,48 @@ datasource db {
 model User {
   id        Int     @id @default(autoincrement())
   firstname String
-  lastname  String
+  lastname  String?
   email     String  @unique
   empId     Int     @unique
-  role      String?
+  role_id   Int?
+  role      Role?   @relation(fields: [role_id], references: [role_id])
+
+  task Tasks[]
 }
 
 model Role {
-  role_id Int    @id @default(autoincrement())
-  role    String @unique
+  role_id Int     @id @default(autoincrement())
+  name    String? @unique
+
+  task Tasks[]
+  user User[]
 }
 
 model Tasks {
-  task_id     Int    @id @default(autoincrement())
-  title       String
-  status      String
+  task_id     Int      @id @default(autoincrement())
+  workflow_id Int
+  workflow    Workflow @relation(fields: [workflow_id], references: [id])
+  state_name  String?
   assigned_to Int
-  created_by  Int
+  user        User?    @relation(fields: [assigned_to], references: [empId])
+  created_by  Int?
+  role_id     Int
+  role        Role?    @relation(fields: [role_id], references: [role_id])
+}
+
+model Workflow {
+  id            Int     @id @default(autoincrement())
+  workflow_name String? @unique
+
+  task  Tasks[]
+  rules Workflow_Rules[]
+}
+
+model Workflow_Rules {
+  id          Int       @id @default(autoincrement())
+  workflow_id Int
+  workflow    Workflow? @relation(fields: [workflow_id], references: [id])
+  state_1     String?
+  state_2     String?
   role_id     Int
 }

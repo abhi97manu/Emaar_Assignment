@@ -14,7 +14,7 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+   
 
     try {
       const response = await axios.post(`${server_url}user/login`, data, {
