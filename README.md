@@ -143,6 +143,8 @@ npm run dev
 
 * Each transition request is validated by comparing the current state with the target state against the allowed transition matrix before performing any update.
 
+* State transition operations are wrapped in database transactions to ensure atomic updates and provide concurrency safety. This approach prevents race conditions and guarantees that workflow validation
+
 
 ---
 
@@ -158,7 +160,7 @@ Used `select` wherever possible to fetch related workflow and task data efficien
 
 * Role table needs manual update at the moment, can be achieved in future
 * Audit Logging is not implemented yet
-* WebSocket scaling requires Redis pub/sub
+* WebSocket using Redis pub/sub to trigger Event for Every State Change
 * No caching layer implemented yet
 * Missing optimistic locking for concurrent updates
 * Pagination not implemented for required endpoints, can be added in future.
