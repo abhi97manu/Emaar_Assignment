@@ -6,13 +6,15 @@ import { useParams } from "react-router-dom";
 
 const YourTasks = () => {
   const { tenantId } = useParams();
+
+
   console.log("Tenant ID in YourTasks:", tenantId);
-  const { data } = useGetApiCallWithTenant(`tenant/tasks`, tenantId);
+  const { data } = useGetApiCallWithTenant(`tenant/tasks `, tenantId);
 
   console.log("Tasks Data:", data?.length);
   return (
     <>
-      <div className="w-full flex flex-col gap-2 h-72 rounded-xl">
+      <div className="w-full flex flex-col gap-2 h-full rounded-xl">
         {data?.length > 0 ? (
           data?.map((task) => {
             return <TaskList values={task} key={task.task_id} />;

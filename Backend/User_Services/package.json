@@ -4,6 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    
+  },
+   "prisma": {
+    "seed": "node seedData/seed.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,4 +23,5 @@
     "jsonwebtoken": "^9.0.3",
     "prisma": "^6.19.2"
   }
+  
 }

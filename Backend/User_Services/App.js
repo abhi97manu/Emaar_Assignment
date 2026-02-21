@@ -10,6 +10,7 @@ const cookies = require('cookie-parser');
 const UserRouter = require('./Routers/User.Route.js');
 const TenantRouter = require('./Routers/TenantRouter.js');
 const adminRouter = require('./Routers/admin.Routes.js');
+const errorHandler = require('./Middleware/errorHandelr.js');
 
 app.use(cors(
    { origin : "http://localhost:5173",
@@ -30,6 +31,8 @@ app.use(`/api`, RegisterRoute)
 app.use(`/user`, UserRouter)
 app.use(`/tenant`,TenantRouter)
 app.use(`/admin`, adminRouter)
+
+app.use(errorHandler)
 
 
 app.listen(SERVICE_PORT, ()=>{

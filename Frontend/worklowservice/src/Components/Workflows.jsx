@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 const server_url = import.meta.env.VITE_SERVER_URL;
 const Workflows = ({ value }) => {
 
-   
+  
   const { tenantId } = useParams();
   async function startTransition() {
     console.log("clicked")
     try {
-    const response =  await axios.post(
+     await axios.post(
         `${server_url}tenant/createTask`,
         value,
         {
@@ -21,8 +21,8 @@ const Workflows = ({ value }) => {
         },
       );
 
-      setResponse(response)
     } catch (err) {
+      alert(err)
       console.log("Caught err", err);
     }
   }

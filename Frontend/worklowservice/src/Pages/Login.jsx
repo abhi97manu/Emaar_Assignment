@@ -26,6 +26,7 @@ const Login = () => {
         navigate("/dashboard");
       }
     } catch (error) {
+     alert(error.response?.data?.message)
       console.log(error);
     }
   };
@@ -61,19 +62,6 @@ const Login = () => {
               />
             </div>
 
-            <div class="flex items-center justify-between">
-              <label class="flex items-center space-x-2 text-sm text-gray-600">
-                <input
-                  type="checkbox"
-                  class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span>Remember me</span>
-              </label>
-
-              <a href="#" class="text-sm text-blue-600 hover:underline">
-                Forgot password?
-              </a>
-            </div>
 
             <button
               type="submit"

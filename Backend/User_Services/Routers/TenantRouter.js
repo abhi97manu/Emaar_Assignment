@@ -2,7 +2,7 @@ const express = require(`express`);
 const authLoginUser = require("../Middleware/authValidation");
 const  tenantChecker  = require("../Middleware/tenantChecker");
 const tenantRoleValidator = require("../Middleware/tenantRoleValidator");
-const { regisUserToTenant, getUserProfileFromTenant, getUserTasks, getAllWorkFlow, createTask } = require("../Controllers/TenantController");
+const { regisUserToTenant, getUserProfileFromTenant, getUserTasks, getAllWorkFlow, createTask, changeState } = require("../Controllers/TenantController");
 
 const TenantRouter = express.Router();
 
@@ -16,6 +16,9 @@ TenantRouter.get(`/allworkflow`, tenantChecker,tenantRoleValidator,getAllWorkFlo
 
 
 TenantRouter.post(`/createTask`, tenantChecker,tenantRoleValidator,createTask)
+
+
+TenantRouter.patch(`/changeState/:workflowId`, tenantChecker,tenantRoleValidator,changeState)
 
 
 

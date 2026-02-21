@@ -11,6 +11,7 @@ import axios from "axios";
 import Workflows from "../Components/Workflows";
 const UserProfile = () => {
   const { tenantId } = useParams();
+  const {userRole, setUserRole} = useContext(AppContext)
 
   const { data } = useGetApiCallWithTenant(`tenant/userDetails`, tenantId);
 
@@ -22,13 +23,16 @@ const UserProfile = () => {
   
 
   const role = data?.role_id;
+  setUserRole(role)
   const allowUser = data?.show;
 
 
 
   return (
     <>
-      {!allowUser && <RegistToTenant key={tenantId} />}
+    <div className="flex flex-col w-full gap-3">
+      {!allowUser ? (<RegistToTenant key={tenantId} />):
+      (
       <div className="w-full   bg-zinc-200">
         <div className="w-full gap-4 flex flex-col border-black border p-4">
           <h1 className="text-2xl font-bold "> Apply Task</h1>
@@ -46,16 +50,19 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
+      )
+}
 
 
 
 
 
-      {role === 104 && (
-        <div className="w-full  h-full">
+      {userRole === 104 && (
+        <div className="w-full border border-black p-4 h-full">
           <ToggleView key={tenantId} />
         </div>
       )}
+      </div>
     </>
   );
 };

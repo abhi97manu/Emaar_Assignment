@@ -2,27 +2,48 @@ import React, { useContext, useEffect } from "react";
 import { useGetApiCall } from "../Utills/useGetApiCall";
 import { Outlet, NavLink, useParams, useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/ContextAPi";
+import axios from "axios";
 
+const server_url = import.meta.env.VITE_SERVER_URL;
 const Dashboard = () => {
   const { setTenantId } = useContext(AppContext);
-  const { data } = useGetApiCall("user/userProfile");
+  const { data, error } = useGetApiCall("user/userProfile");
   const tenantList = data?.data?.tenant_id;
   const { tenantId } = useParams();
-  const e_data = data?.data;
+  const emp_data = data?.data;
   const navigate = useNavigate();
-
-  if (e_data) {
+  console.log(data);
+  if (emp_data) {
     localStorage.setItem(
       "MyUser",
       JSON.stringify({
-        email: e_data.email,
-        firstname: e_data.firstname,
-        lastname: e_data.lastname,
+        email: emp_data.email,
+        firstname: emp_data.firstname,
+        lastname: emp_data.lastname,
       }),
     );
   }
 
- 
+  if (error) {
+    alert(error.response.data.message);
+  }
+
+  async function logout() {
+    console.log("click")
+    try {
+      await axios.post(
+        `${server_url}user/logout`,
+        {},
+        { withCredentials: true },
+      );
+
+      localStorage.removeItem("user");
+
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -33,13 +54,14 @@ const Dashboard = () => {
         </div>
 
         <nav className="flex-1 p-4 space-y-2">
+          <h1 className="text=xl font-bold"> Tenant List</h1>
           {tenantList &&
             tenantList.map((tenant) => {
               return (
                 <NavLink
                   to={`/dashboard/tenantRegister/${tenant}`}
                   key={`${tenant}`}
-                  className="block px-4 py-2 rounded hover:bg-gray-700"
+                  className="block border px-4 py-2 rounded hover:bg-gray-700"
                   onClick={() => {
                     setTenantId(tenant);
                   }}
@@ -50,21 +72,18 @@ const Dashboard = () => {
             })}
         </nav>
 
-        <div className="p-4 border-t border-gray-700">Logout</div>
+        <div className="p-4 border-t hover:cursor-pointer border-gray-700" onClick={() => logout()}>
+          Logout
+        </div>
       </aside>
 
       {/* Right section */}
       <div className="flex-1 flex flex-col">
         {/* Navbar */}
         <header className="bg-white shadow px-6 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Dashboard</h1>
+          <h1 className="text-xl font-semibold">{emp_data?.firstname}</h1>
 
           <div className="flex items-center gap-4">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="border px-3 py-1 rounded"
-            />
             <div className="w-8 h-8 bg-gray-300 rounded-full" />
           </div>
         </header>

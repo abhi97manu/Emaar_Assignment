@@ -9,8 +9,7 @@ const Register = () => {
   const { data, error } = useGetApiCall("api/tenantList");
   const [loading, setLoading] = useState(false);
 
-    
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const {
     register,
@@ -20,19 +19,17 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
- console.log(data);
-   
-    
+  
     try {
       const response = await axios.post(`${server_url}api/register`, data);
-      if (response)
-      {setLoading(false);
-        navigate('/login')
+      if (response) {
+        setLoading(false);
+        navigate("/");
       }
-      
     } catch (error) {
-      console.log(error);
-    } 
+      alert(error.response?.data?.message)
+     // console.log(error);
+    }
   };
 
   return (
@@ -120,28 +117,25 @@ const Register = () => {
             </div>
           </div>
           <div class="grid md:grid-cols-2 md:gap-6">
-       
             <div class="relative z-0 w-full mb-5 group">
               {data ? (
                 data.data.map((value) => {
                   return (
                     <>
-                    <input
-                      type="checkbox"
-                      name={`${value.id}`}
-                      value = {`${value.tenant_id}`}
-                      id={`${value.tenant_id}`}
-                      {...register("company")}
-                    />
-                     <label for={`${value.tenant_id}`}>{value.name}</label>
-                     </>
+                      <input
+                        type="checkbox"
+                        name={`${value.tenant_id}`}
+                        value={`${value.tenant_id}`}
+                        id={`${value.tenant_id}`}
+                        {...register("company")}
+                      />
+                      <label for={`${value.tenant_id}`}>{value.name}</label>
+                    </>
                   );
                 })
               ) : (
                 <label>No Companies</label>
               )}
-
-           
             </div>
           </div>
           <button

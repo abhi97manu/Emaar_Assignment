@@ -11,7 +11,7 @@ const RegistToTenant = () => {
   const {
     register,
     handleSubmit,
-    watch,
+   
     formState: { errors },
   } = useForm();
 
@@ -32,8 +32,10 @@ const RegistToTenant = () => {
   };
 
   return (
-    <div className="w-64 p-4 border rounded-lg shadow space-y-3">
+    <div className="w-full p-4 flex flex-col items-center border rounded-lg shadow space-y-3">
+      <h1 className="text-xl font-semibold underline">Register To your Tenant</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
+       
         <input
           type="number"
           placeholder="Employee ID"
@@ -45,7 +47,7 @@ const RegistToTenant = () => {
           type="submit"
           className="w-full bg-blue-600 text-white text-sm py-1.5 rounded hover:bg-blue-700 active:scale-95 transition"
         >
-          Submit
+          Register
         </button>
       </form>
     </div>
