@@ -111,13 +111,30 @@ npm run dev
 
 ---
 
-### Multi-tenant Architecture
+### Scalability & Architecture
 
-* Each tenant operates with an isolated database that stores its own Workflow data, ensuring strong data separation and improved security.
+* The server follows a stateless architecture, with no session data stored in server memory.
 
-* A centralized master database is maintained to manage global user accounts and store metadata about all connected tenants. This master database enables efficient tenant identification and supports dynamic switching between tenant databases during runtime.
+* Authentication is implemented using JWT tokens, allowing requests to be validated independently across instances.
 
-* This approach provides scalability, data isolation, and flexibility when onboarding new tenants or expanding the system. 
+* Each request can be processed by any server instance, enabling seamless horizontal scaling.
+
+* A load balancer can distribute traffic across multiple server instances to improve availability and performance.
+
+* The database acts as the single source of truth, ensuring data consistency across all running instances.
+
+---
+
+### Multi-Tenant Database Design
+
+* Each tenant operates with an isolated database that stores its own workflow data, ensuring strong data separation and enhanced security.
+
+* A centralized master database manages global user accounts and maintains metadata for all registered tenants.
+
+* The master database enables tenant identification and dynamic runtime switching between tenant databases.
+
+* This architecture improves scalability, data isolation, and flexibility when onboarding new tenants or expanding the system.
+
 ---
 
 
