@@ -140,7 +140,9 @@ npm run dev
 
 ###  Middleware
 
-* A JWT-based authentication middleware is implemented to enable secure and efficient user authorization across protected routes.
+* A JWT-based authentication middleware is implemented to enable secure and efficient user authorization across protected routes. AccessToken is generated at login to authenticate user requests, while TenantToken is used to identify and authorize tenant-specific operations.
+
+* The Tenant Middleware intercepts incoming requests, validates tenant identity using the TenantToken, and enriches the request with a tenant-specific Prisma client so downstream handlers perform isolated and secure database operations.
 
 * A centralized error-handling middleware is used to capture and process application errors consistently, ensuring cleaner controllers and standardized API responses.
 
@@ -167,7 +169,7 @@ npm run dev
 
 ###  Relation eager loading to avoid N+1
 
-Used `select` wherever possible to fetch related workflow and task data efficiently.
+* Used `select` wherever possible to fetch related workflow and task data efficiently.
 
 ---
 
