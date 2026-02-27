@@ -15,7 +15,7 @@ async function regisUserToTenant(req, res) {
         email,
       },
     });
-    console.log(user);
+    console.log("created :",user);
     res.status(200).send({ message: "User registered successfully", user });
   } catch (err) {
     console.log(err);
@@ -50,7 +50,7 @@ async function getUserProfileFromTenant(req, res) {
     }
   } catch (err) {
     res.status(500).send({ message: `Error fetching user profile` });
-    cosnole.log("Error fetching user profile: ", err);
+    console.log("Error fetching user profile: ", err);
   }
 }
 
@@ -61,7 +61,7 @@ async function getUserTasks(req, res) {
   console.log(empId, "emp id from tenant controller");
   try {
     const tasks = await prisma.tasks.findMany({
-      where: { created_by: empId },
+      where: { assigned_to: empId },
     });
 
     res.status(200).send(tasks);
@@ -142,7 +142,7 @@ async function changeState(req, res) {
           role_id: Number(nextroleId),
         },
       });
-
+console.log("nextState", nextState, "nextroleId", nextroleId, "nextEmpId", nextEmpId);
       const {task_id}  = await tx.tasks.findFirst({
         where: {
           AND: [

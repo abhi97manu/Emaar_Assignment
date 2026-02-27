@@ -5,41 +5,55 @@ async function addWorkflowRule(req, res) {
   const obj = req.body.find((i) => i.workFlowName);
   const workflowname = obj?.workFlowName;
   const ruledata = req.body.filter((i) => !i.workFlowName);
-  console.log("flwo name ", workflowname);
+  console.log("flwo name ", ruledata);
   try {
     if (role_id === 104) {
       console.log("workflowname", workflowname);
-      const workflowId = await prisma.$queryRaw`
-  SELECT id FROM "Workflow" WHERE workflow_name = ${workflowname}`;
+      //     const workflowId = await prisma.$queryRaw`
+      // SELECT id FROM "Workflow" WHERE workflow_name = ${workflowname}`;
 
-      const roleid = await prisma.$queryRaw`
-  SELECT role_id FROM "Role" WHERE name = ${task.aprroveBy}`;
+      //     const roleid = await prisma.$queryRaw`
+      // SELECT role_id FROM "Role" WHERE name = ${task.aprroveBy}`;
 
-      const response = await prisma.$transaction([
-        await prisma.workflow.create({
+      const response = await prisma.$transaction(async(tx) => {
+       const workflowId =  await tx.workflow.create({
           data: {
             workflow_name: workflowname,
           },
-        }),
+        });
 
-        Promise.all(
-          ruledata.map(async (task, i) => {
-            if (task.initialState === null || task.aprroveby === null) {
-              return;
-            }
+      //   const workflowId = await tx.workflow.findFirst({
+      //     where: {
+      //       workflow_name: workflowname,
+      //     }
+      // })
+        console.log("workflow id ", workflowId);
+        await Promise.all(
+        ruledata.map(async (task, i) => {
+           if (task.initialState === null || task.aprroveby === null) {
+             return;
+          }
+          console.log("task ", task);
+          const role_id = await tx.role.findFirst({
+            where: {
+              name: task.aprroveBy,
+            },
+          });
 
-            const response = await prisma.Workflow_Rules.create({
-              data: {
-                state_1: task.initialState,
-                role_id: roleid[0]?.role_id,
-                state_2: task.endState,
-                workflow_id: workflowId[0]?.id,
-              },
-            });
-            return response;
-          }),
-        ),
-      ]);
+          const response = await tx.Workflow_Rules.create({
+            data: {
+              state_1: task.initialState,
+              role_id: role_id?.role_id,
+              state_2: task.endState,
+              workflow_id: workflowId?.id,
+            },
+          });
+          
+          return response;
+        })
+      );
+    });
+  
 
       if (response) {
         res.status(200).send({ message: "Rule created " });

@@ -3354,7 +3354,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Role.
      */
-    data?: XOR<RoleCreateInput, RoleUncheckedCreateInput>
+    data: XOR<RoleCreateInput, RoleUncheckedCreateInput>
   }
 
   /**
@@ -7460,19 +7460,21 @@ export namespace Prisma {
   }
 
   export type RoleCreateInput = {
+    role_id: number
     name?: string | null
     task?: TasksCreateNestedManyWithoutRoleInput
     user?: UserCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUncheckedCreateInput = {
-    role_id?: number
+    role_id: number
     name?: string | null
     task?: TasksUncheckedCreateNestedManyWithoutRoleInput
     user?: UserUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUpdateInput = {
+    role_id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
     task?: TasksUpdateManyWithoutRoleNestedInput
     user?: UserUpdateManyWithoutRoleNestedInput
@@ -7486,11 +7488,12 @@ export namespace Prisma {
   }
 
   export type RoleCreateManyInput = {
-    role_id?: number
+    role_id: number
     name?: string | null
   }
 
   export type RoleUpdateManyMutationInput = {
+    role_id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -8438,12 +8441,13 @@ export namespace Prisma {
   }
 
   export type RoleCreateWithoutUserInput = {
+    role_id: number
     name?: string | null
     task?: TasksCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUncheckedCreateWithoutUserInput = {
-    role_id?: number
+    role_id: number
     name?: string | null
     task?: TasksUncheckedCreateNestedManyWithoutRoleInput
   }
@@ -8490,6 +8494,7 @@ export namespace Prisma {
   }
 
   export type RoleUpdateWithoutUserInput = {
+    role_id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
     task?: TasksUpdateManyWithoutRoleNestedInput
   }
@@ -8663,12 +8668,13 @@ export namespace Prisma {
   }
 
   export type RoleCreateWithoutTaskInput = {
+    role_id: number
     name?: string | null
     user?: UserCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUncheckedCreateWithoutTaskInput = {
-    role_id?: number
+    role_id: number
     name?: string | null
     user?: UserUncheckedCreateNestedManyWithoutRoleInput
   }
@@ -8740,6 +8746,7 @@ export namespace Prisma {
   }
 
   export type RoleUpdateWithoutTaskInput = {
+    role_id?: IntFieldUpdateOperationsInput | number
     name?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateManyWithoutRoleNestedInput
   }
